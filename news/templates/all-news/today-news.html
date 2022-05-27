@@ -1,0 +1,43 @@
+{%extends 'all-news/base.html'%}
+
+{% block content %}
+{{block.super}}
+<!--  we add the block.super function which allows us to use any content 
+    that was defined inside a block in the parent template. -->
+
+    <div class="container">
+
+        <!-- Looping through news   -->
+        {% for news_item in news %}
+        
+
+          <div class="row">
+            <!-- displaying News articles -->
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <h2 class="text-center"> {{ news_item.title }} </h2>
+            </div>
+            <!-- We add an img tag where we pass in the article's article_image attribute.
+               The ImageFieldprovides a url attribute that provides the absolute url to the file. 
+               We can load our page to confirm the image is being displayed. -->
+               
+            <!--Display news Article images  -->
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <img src="{{news_item.article_image.url}}" class="img-responsive" alt="Image">
+            </div>
+          
+          </div>
+      
+      
+      
+        </div>
+        <!-- Django provides a for/empty template tag.
+             If the list has items it will loop through all the available news articles and display the titles. 
+             If the list is empty it will display a helpful message. -->
+        {% empty %}
+        <div class="row">
+          <h2 class="text-center">There No News Items</h2>
+        </div>
+        {% endfor %}
+      
+      </div>
+{% endblock %}
